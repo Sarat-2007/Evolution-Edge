@@ -1,0 +1,41 @@
+# Evolution Edge – Cloud Requirements (AMD Instinct MI300X + ROCm)
+# Install on AMD Developer Cloud: pip install -r requirements_cloud.txt
+#
+# Hardware target: AMD Instinct MI300X (AMD Developer Cloud)
+# ROCm version: 6.x (latest available May 2026)
+# Python: 3.11 or 3.12
+
+# ── PyTorch with ROCm ──────────────────────────────────────────────────────
+# Install ROCm PyTorch from AMD's official index:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
+torch>=2.2.0
+
+# ── Hugging Face Stack ─────────────────────────────────────────────────────
+transformers>=4.40.0
+tokenizers>=0.19.0
+accelerate>=0.30.0
+datasets>=2.19.0
+huggingface_hub>=0.22.0
+
+# ── LoRA / Knowledge Distillation ─────────────────────────────────────────
+peft>=0.10.0                  # LoRA fine-tuning of student model
+
+# ── ONNX Export ────────────────────────────────────────────────────────────
+onnx>=1.16.0
+optimum[exporters]>=1.19.0    # torch.onnx export via HF Optimum
+onnxruntime>=1.18.0           # verify exported model on cloud too
+
+# ── Optional: AMD Quark Quantization ────────────────────────────────────────
+# Uncomment if AMD Quark is available in your cloud environment:
+# amd-quark>=0.1.0
+
+# ── API Server (cloud_agent.py exposes HTTP endpoint) ─────────────────────
+fastapi>=0.111.0
+uvicorn>=0.29.0
+python-multipart>=0.0.9
+
+# ── Utilities ──────────────────────────────────────────────────────────────
+numpy>=1.26.0
+tqdm>=4.66.0
+requests>=2.31.0
+scipy>=1.13.0
